@@ -20,10 +20,10 @@ include_once 'forbId.php';
 
 //var_dump(headers_list());
 /*
-$dbhost1=$dbhost;
-$dbuser1=$dbuser;
-$dbpw1=$dbpw;
-$dbname1=$dbname;
+$dbhost1=$dbhost; 
+$dbuser1=$dbuser; 
+$dbpw1=$dbpw; 
+$dbname1=$dbname; 
 */
 function myaddslashes($var)
 {
