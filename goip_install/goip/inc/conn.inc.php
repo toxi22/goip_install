@@ -34,39 +34,40 @@ function myaddslashes($var)
 }
 
 class DB {
+	public $conn;
 	function DB(){
 		global $dbhost,$dbuser,$dbpw,$dbname;
+		
+			$this->conn=mysqli_connect($dbhost,$dbuser,$dbpw) or die("Could not connect"); 
+			$this->conn->select_db($dbname); 
+			$this->conn->query("SET NAMES 'utf8'"); 
+			$this->conn->query("set sql_mode='ANSI'"); 
+		}
+		function query($sql) {
 
-		$conn=mysql_connect($dbhost,$dbuser,$dbpw) or die("Could not connect");
-		mysql_select_db($dbname,$conn);
-		mysql_query("SET NAMES 'utf8'");		
-		mysql_query("set sql_mode='ANSI'");
-	}
-	function query($sql) {
+			$result = $this->conn->query($sql); 
+			return $result; 
+		}
+		function updatequery($sql) {
 
-		$result=mysql_query($sql) or die("Bad query: ".mysql_error()."($sql)");
-		return $result;
-	}
-	function updatequery($sql) {
-
-                $result=mysql_query($sql);
-                return $result;
+			$result = $this->conn->query($sql); 
+			return $result;
         }
 
-	function fetch_array($query) {
-		return mysql_fetch_array($query);
-	}
+		function fetch_array($query) {
+			return $query->fetch_array(MYSQLI_NUM);
+		}
 	
-	function fetch_assoc($query) {
-		return mysql_fetch_assoc($query);
-	}
+		function fetch_assoc($query) {
+			return $query->fetch_assoc(); 
+		}
 	
-	function num_rows($query) {
-		return mysql_num_rows($query);
-	}
-	function real_escape_string($item){
-		return mysql_real_escape_string($item);
-	}
+		function num_rows($query) {
+			return $query->num_rows;
+		}
+		function real_escape_string($item){
+			return mysqli_real_escape_string($item);
+		}
 }
 
 $db=new DB;
