@@ -1,0 +1,10 @@
+Debian/Ubuntu
+
+apt-get install aptitude libapache2-mod-php apache2 install mysql-server php7.0-mysql
+
+# Старый модуль заменен на php7.0-mysql
+# apt-get install php7.0-mysqlnd
+ 
+phpenmod mysqlnd
+ 
+service apache2 restart
